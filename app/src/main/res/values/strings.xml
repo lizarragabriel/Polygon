@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Poligonos</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="figuras">
+        <item>Círculo</item>
+        <item>Triángulo</item>
+        <item>Cuadrado</item>
+        <item>Rectangulo</item>
+        <item>Pentagono</item>
+        <item>Hexagono</item>
+    </string-array>
+</resources>
