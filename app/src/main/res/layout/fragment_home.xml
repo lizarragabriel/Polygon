@@ -39,10 +39,9 @@
         android:src="@drawable/ic_poligono"
         app:layout_constraintBottom_toBottomOf="@+id/mView"
         app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.765"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        />
 
     <TextView
         android:id="@+id/textView"
@@ -84,7 +83,7 @@
         android:id="@+id/mFirstValueInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:boxBackgroundMode="outline"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginStart="20dp"
@@ -106,7 +105,7 @@
         android:id="@+id/mSecondValueInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:boxBackgroundMode="outline"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginStart="20dp"
@@ -129,14 +128,14 @@
         android:id="@+id/mCalculate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         android:text="Calcular"
         android:layout_marginTop="5dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="#FF8A65"
+        android:backgroundTint="@color/teal_200"
         android:textAllCaps="false"
-
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mSecondValueInput" />
@@ -172,7 +171,7 @@
         app:layout_constraintTop_toBottomOf="@+id/mShowArea" />
 
     <TextView
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/mShowFormula"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
