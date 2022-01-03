@@ -12,6 +12,10 @@
         <variable
             name="perimeter"
             type="String" />
+
+        <variable
+            name="formula"
+            type="String" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -130,7 +134,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="#FF8A65"
         android:textAllCaps="false"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -138,11 +142,12 @@
         app:layout_constraintTop_toBottomOf="@+id/mSecondValueInput" />
 
     <TextView
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/mShowArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@{area}"
+        android:fontFamily="monospace"
         android:textSize="24sp"
         android:layout_marginTop="5dp"
         android:layout_marginStart="20dp"
@@ -152,10 +157,11 @@
         app:layout_constraintTop_toBottomOf="@+id/mCalculate" />
 
     <TextView
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/mShowPerimeter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="monospace"
         android:text="@{perimeter}"
         android:textSize="24sp"
         android:layout_marginTop="5dp"
@@ -164,6 +170,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mShowArea" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/mShowFormula"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{formula}"
+        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mShowPerimeter" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

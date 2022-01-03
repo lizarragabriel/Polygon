@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.lizarragabriel.poligonos.ViewModel.HomeViewModel;
 import com.lizarragabriel.poligonos.databinding.FragmentHomeBinding;
 
 import java.math.BigDecimal;
@@ -30,9 +33,19 @@ public class HomeFragment extends Fragment {
         return binding.getRoot();
     }
 
+    private HomeViewModel mViewModel;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        mViewModel.getArea().observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(Double aDouble) {
+                mShowResult();
+                binding.setArea("Área " + aDouble);
+                binding.setPerimeter("Perimetro " + mViewModel.getPerimetro().getValue());
+            }
+        });
 
         String[] mFiguras = getResources().getStringArray(R.array.figuras);
         ArrayAdapter mAdapter = new ArrayAdapter(getContext(), R.layout.list_item, mFiguras);
@@ -82,23 +95,10 @@ public class HomeFragment extends Fragment {
         binding.mFirstValueInput.setVisibility(View.VISIBLE);
         binding.mCalculate.setVisibility(View.VISIBLE);
         binding.mCalculate.setOnClickListener(v -> {
-            try {
-                double mRadio = Double.parseDouble(binding.mFirstValue.getText().toString());
-                Figura mFigure = new Circle(mRadio);
-                double mArea = new BigDecimal(mFigure.mCalculateArea()).setScale(2, RoundingMode.HALF_UP).doubleValue();
-                double mPerimeter = new BigDecimal(mFigure.mCalculatePerimeter()).setScale(2, RoundingMode.HALF_UP).doubleValue();
-                binding.setArea("El área es: " + mArea);
-                binding.setPerimeter("El perimetro es: " + mPerimeter);
-
-                binding.mShowArea.setVisibility(View.VISIBLE);
-                binding.mShowPerimeter.setVisibility(View.VISIBLE);
-                mClear();
-                mFinish();
-            } catch (RuntimeException e) {
-                Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+            mViewModel.mCalcularCirculo(binding.mFirstValue.getText().toString());
+            mClear();
+            mFinish();
         });
-
     }
 
     private void mCalcularTriangulo() {
@@ -111,22 +111,9 @@ public class HomeFragment extends Fragment {
         binding.mSecondValueInput.setVisibility(View.VISIBLE);
         binding.mCalculate.setVisibility(View.VISIBLE);
         binding.mCalculate.setOnClickListener(v -> {
-            try {
-                double mWidth = Double.parseDouble(binding.mFirstValue.getText().toString());
-                double mHeight = Double.parseDouble(binding.mSecondValue.getText().toString());
-                Figura mFigure = new Triangle(mWidth, mHeight);
-                double mArea = new BigDecimal(mFigure.mCalculateArea()).setScale(2, RoundingMode.HALF_UP).doubleValue();
-                double mPerimeter = new BigDecimal(mFigure.mCalculatePerimeter()).setScale(2, RoundingMode.HALF_UP).doubleValue();
-                binding.setArea("El área es: " + mArea);
-                binding.setPerimeter("El perimetro es: " + mPerimeter);
-
-                binding.mShowArea.setVisibility(View.VISIBLE);
-                binding.mShowPerimeter.setVisibility(View.VISIBLE);
-                mClear();
-                mFinish();
-            } catch (RuntimeException e) {
-                Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+            mViewModel.mCalcularCuadrado(binding.mFirstValue.getText().toString());
+            mClear();
+            mFinish();
         });
     }
 
@@ -255,12 +242,20 @@ public class HomeFragment extends Fragment {
     private void mClear() {
         binding.mFirstValue.getText().clear();
         binding.mSecondValue.getText().clear();
+        binding.mFirstValue.clearFocus();
+        binding.mSecondValue.clearFocus();
 
     }
 
     private void mFinish() {
-        binding.mFirstValue.setCursorVisible(false);
+
         binding.mFirstValue.onEditorAction(EditorInfo.IME_ACTION_DONE);
         binding.mSecondValue.onEditorAction(EditorInfo.IME_ACTION_DONE);
+    }
+
+    private void mShowResult() {
+        binding.mShowArea.setVisibility(View.VISIBLE);
+        binding.mShowPerimeter.setVisibility(View.VISIBLE);
+        binding.mShowFormula.setVisibility(View.VISIBLE);
     }
 }
