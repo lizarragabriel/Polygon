@@ -1,0 +1,30 @@
+<resources>
+    <!-- Header -->
+    <string name="app_name">Polygon</string>
+    <string name="header_image_title">Polygon Header</string>
+
+    <!-- Body -->
+    <string name="polygon_title">Polygon</string>
+    <string name="polygon_select">Select a polygon</string>
+
+    <!-- EditText Layout -->
+    <string name="first_value_hint">First Value</string>
+    <string name="second_value_hint">Second Value</string>
+    <string name="calculate_button">Calculate</string>
+
+    <!-- Final Result -->
+    <string name="result_title">Result</string>
+    <string name="area_is">Area: </string>
+    <string name="perimeter_is">Perimeter: </string>
+    <string name="polygon_image_title">A polygon</string>
+
+    <!-- Polygon Name -->
+    <string-array name="figures">
+        <item>Circle</item>
+        <item>Triangle</item>
+        <item>Square</item>
+        <item>Rectangle</item>
+        <item>Pentagon</item>
+        <item>Hexagon</item>
+    </string-array>
+</resources>

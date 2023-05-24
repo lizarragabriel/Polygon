@@ -1,9 +1,25 @@
 <resources>
-    <string name="app_name">Poligonos</string>
+    <!-- Header -->
+    <string name="app_name">Polygon</string>
+    <string name="header_image_title">Polygon Header</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Body -->
+    <string name="polygon_title">Poligono</string>
+    <string name="polygon_select">Selecciona un poligono</string>
 
-    <string-array name="figuras">
+    <!-- EditText Layout -->
+    <string name="first_value_hint">First Value</string>
+    <string name="second_value_hint">Second Value</string>
+    <string name="calculate_button">Calcular</string>
+
+    <!-- Final Result -->
+    <string name="result_title">Resultado</string>
+    <string name="area_is">Área: </string>
+    <string name="perimeter_is">Perimetro: </string>
+    <string name="polygon_image_title">A polygon</string>
+
+    <!-- Polygon Name -->
+    <string-array name="figures">
         <item>Círculo</item>
         <item>Triángulo</item>
         <item>Cuadrado</item>

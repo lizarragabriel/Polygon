@@ -2,7 +2,7 @@
 <resources>
     <color name="purple_200">#FFB446</color>
     <color name="purple_500">#FF9800</color>
-    <color name="purple_700">#FF5722</color>
+    <color name="purple_700">@color/ic_launcher_background</color>
     <color name="teal_200">#039BE5</color>
     <color name="teal_700">#2C384A</color>
     <color name="black">#FF000000</color>

@@ -4,202 +4,192 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <data>
+        <import type="android.view.View"/>
         <variable
-            name="area"
-            type="String" />
-
-        <variable
-            name="perimeter"
-            type="String" />
-
-        <variable
-            name="formula"
-            type="String" />
+            name="viewModel"
+            type="com.lizarragabriel.polygon.viewmodel.HomeViewModel" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".HomeFragment">
-
-    <View
-        android:id="@+id/mView"
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:background="@drawable/view_back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/ic_poligono"
-        app:layout_constraintBottom_toBottomOf="@+id/mView"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
-        android:text="Poligonos"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/mView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:id="@+id/textInputLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mView">
+        android:layout_height="match_parent"
+        tools:context=".ui.HomeFragment">
 
-        <AutoCompleteTextView
-            android:id="@+id/mDropDown"
+        <ImageView
+            android:id="@+id/headerImage"
+            android:src="@drawable/qwqe"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/header_image_title"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/applicationName"
+            android:text="@string/app_name"
+            android:textSize="44sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/headerImage"
+            app:layout_constraintStart_toStartOf="@+id/selectPolygonLayout"
+            app:layout_constraintTop_toTopOf="@+id/titleGuideX" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/titleGuideX"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.075" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/selectPolygonLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Polígono"
-            android:inputType="none"
-            android:text="Selecciona un Polígono" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerImage">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mFirstValueInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:boxBackgroundMode="outline"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+            <AutoCompleteTextView
+                android:id="@+id/polygonDropDown"
+                android:hint="@string/polygon_title"
+                android:inputType="none"
+                android:text="@string/polygon_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <com.google.android.material.textfield.TextInputEditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/mFirstValueInput"
+            android:visibility="@{viewModel.firstValueVisible ? View.VISIBLE : View.GONE}"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxBackgroundMode="outline"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
-            android:id="@+id/mFirstValue"
-            android:inputType="number"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectPolygonLayout">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/mFirstValue"
+                android:hint="@{viewModel.firstValueText}"
+                android:text="@{viewModel.emptyValue}"
+                android:inputType="number"
+                tools:hint="@string/first_value_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mSecondValueInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:boxBackgroundMode="outline"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mFirstValueInput">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mSecondValueInput"
+                android:visibility="@{viewModel.secondValueVisible ? View.VISIBLE : View.GONE}"
+                app:boxBackgroundMode="outline"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mFirstValueInput">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mSecondValue"
+                    android:hint="@{viewModel.secondValueText}"
+                    android:text="@{viewModel.emptyValue}"
+                    android:inputType="number"
+                    tools:hint="@string/second_value_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/mCalculate"
+            android:visibility="@{viewModel.firstValueVisible ? View.VISIBLE : View.GONE}"
+            android:backgroundTint="@color/teal_200"
+            android:onClick="@{() -> viewModel.calculateButton(mFirstValue.getText().toString(), mSecondValue.getText().toString())}"
+            android:text="@string/calculate_button"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
-            android:id="@+id/mSecondValue"
-            android:inputType="number"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mSecondValueInput" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <Button
-        android:id="@+id/mCalculate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:text="Calcular"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/teal_200"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mSecondValueInput" />
-
-    <TextView
-        android:visibility="visible"
-        android:id="@+id/mShowArea"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@{area}"
-        android:fontFamily="monospace"
-        android:textSize="24sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mCalculate" />
-
-    <TextView
-        android:visibility="visible"
-        android:id="@+id/mShowPerimeter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:text="@{perimeter}"
-        android:textSize="24sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mShowArea" />
-
-    <TextView
-        android:visibility="visible"
-        android:id="@+id/mShowFormula"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@{formula}"
-        android:textSize="24sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mShowPerimeter" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/secondContraint"
+            android:visibility="@{viewModel.visible ? View.VISIBLE : View.GONE}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mCalculate">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/resultTitle"
+                android:fontFamily="monospace"
+                android:text="@string/result_title"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/showArea"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
+            <ImageView
+                android:id="@+id/imageView"
+                loadImage="@{viewModel.figurax.image}"
+                android:contentDescription="@string/polygon_image_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/circulo" />
 
+            <TextView
+                android:id="@+id/showArea"
+                roundArea="@{viewModel.figurax.mCalculateArea()}"
+                android:textSize="24sp"
+                tools:text="@string/area_is"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/showPerimeter"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/showPerimeter"
+                roundPerimeter="@{viewModel.figurax.mCalculatePerimeter()}"
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="@string/perimeter_is"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
-
-<!--<EditText
-        android:id="@+id/mFirstValue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:hint="First Value"
-        android:inputType="number"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />-->
